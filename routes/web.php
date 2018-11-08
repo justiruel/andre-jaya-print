@@ -16,7 +16,13 @@ Route::get('/', function () {
     //return view('welcome');
 });
 
+Route::get('/signin', 'UsersController@signin');
+Route::post('/run_signin', 'UsersController@run_signin');
+Route::get('/run_signout', 'UsersController@run_signout');
 
-Route::get('/import', 'UsersController@import');
-Route::get('/upload', 'UsersController@upload_form');
-Route::post('/run_upload', 'UsersController@run_upload');
+Route::group(['middleware' => 'authaj'], function(){
+    Route::get('/import', 'UsersController@import');
+    Route::get('/upload', 'UsersController@upload_form');
+    Route::post('/run_upload', 'UsersController@run_upload');
+    Route::get('/retrieve_data_karyawan', 'UsersController@retrieve_data_karyawan');
+});

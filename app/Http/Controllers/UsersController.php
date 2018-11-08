@@ -8,6 +8,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\File;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller 
 {
@@ -20,7 +21,9 @@ class UsersController extends Controller
     {
       $data =  Excel::selectSheetsByIndex(0)->load(public_path().'/users.xlsx', function($reader) {})->toArray();
       foreach ($data as $key => $value) {
-        $data[$key]['tanggal'] = $value['tanggal']->format('d-M-Y');
+        if(!empty($value['tanggal'])){
+          $data[$key]['tanggal'] = $value['tanggal']->format('d-M-Y');
+        }
         $data[$key]['gaji_kotor'] = "Rp" . number_format($data[$key]['gaji_kotor'], 0, ",", ".");
         $data[$key]['lembur'] = "Rp" . number_format($data[$key]['lembur'], 0, ",", ".");
         $data[$key]['tabungan'] = "Rp" . number_format($data[$key]['tabungan'], 0, ",", ".");
@@ -45,7 +48,9 @@ class UsersController extends Controller
       $path = $request->fileUpload->storeAs('file', 'users.xlsx'); 
       $data =  Excel::selectSheetsByIndex(0)->load(storage_path().'\app\file\users.xlsx', function($reader) {})->toArray();
       foreach ($data as $key => $value) {
-        $data[$key]['tanggal'] = $value['tanggal']->format('d-M-Y');
+        if(!empty($value['tanggal'])){
+          $data[$key]['tanggal'] = $value['tanggal']->format('d-M-Y');
+        }
         $data[$key]['gaji_kotor'] = "Rp" . number_format($data[$key]['gaji_kotor'], 0, ",", ".");
         $data[$key]['lembur'] = "Rp" . number_format($data[$key]['lembur'], 0, ",", ".");
         $data[$key]['tabungan'] = "Rp" . number_format($data[$key]['tabungan'], 0, ",", ".");
@@ -55,4 +60,41 @@ class UsersController extends Controller
       }
       return view('user',['data'=>$data]);  
     }
+
+
+    public function signin(Request $request) 
+    {
+      return view('signin'); 
+    }
+
+    public function run_signin(Request $request) 
+    {
+      //user=andrejaya
+      //password=andrejaya99
+      $username = $request->input('username');
+      $password = $request->input('password');
+
+      if ($username == "andrejaya" && $password == "andrejaya99" ){
+        $request->session()->put('key', 'cvandrejaya');
+        return redirect('/upload');
+      }else{
+        return redirect('/signin');
+      }
+    }
+
+
+    public function run_signout(Request $request) 
+    {
+      $request->session()->forget('key');
+      return redirect('/signin');
+    }
+
+    public function retrieve_data_karyawan(Request $request) 
+    {
+      $data = DB::table('karyawan')->get();
+      echo "<pre/>";
+      print_r($data);
+      //return view('data_karyawan'); 
+    }
+
 }

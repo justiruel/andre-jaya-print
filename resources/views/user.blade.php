@@ -64,12 +64,12 @@
   </head>
 
   <body  class="letter" style="margin-top:7mm">
-    <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#007bff;">
+    <nav class="navbar  navbar-fixed-top" style="background-color:#007bff;">
         <div class="container">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" style="float:right">
                 <li>
                     <p class="navbar-btn">
-                    <a href="{{url('/upload')}}"  class="btn" style="color:#000000; background-color: #ffffff;font-family: arial">UPLOAD</a>
+                    <a href="{{url('/upload')}}"  class="btn" style="background-color: #ffffff;font-family: arial;color:#000000; ">UPLOAD</a>
                     <button type="button" onclick="window.print();" class="btn" style="background-color: #ffffff;font-family: arial">PRINT</button> 
                   </p>
                 </li>
