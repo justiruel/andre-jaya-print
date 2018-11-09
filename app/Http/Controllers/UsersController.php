@@ -46,7 +46,7 @@ class UsersController extends Controller
       //$destinationPath = 'uploads';
       //$file->move($destinationPath,$file->getClientOriginalName());
       $path = $request->fileUpload->storeAs('file', 'users.xlsx'); 
-      $data =  Excel::selectSheetsByIndex(0)->load(storage_path().'\app\file\users.xlsx', function($reader) {})->toArray();
+      $data =  Excel::selectSheetsByIndex(0)->load(storage_path().'/app/file/users.xlsx', function($reader) {})->toArray();
       foreach ($data as $key => $value) {
         if(!empty($value['tanggal'])){
           $data[$key]['tanggal'] = $value['tanggal']->format('d-M-Y');
