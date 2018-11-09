@@ -35,13 +35,15 @@
           </tr>
         </thead>
         <tbody>
+            @foreach($data as $dt) 
           <tr>
             <th scope="row">1</th>
-            <td>99999999999999999999999</td></td>
-            <td>narutonarutonarutonarutonarutonarutonarutonarutonarutonarutonarutonarutonarutonaruto</td>
-            <td>999999999999999999999999999999999999999999999</td>
-            <td>99 november 99999</td>
+            <td>{{$dt->ktp}}</td></td>
+            <td>{{$dt->nama}}</td>
+            <td>{{$dt->telp}}</td>
+            <td>{{$dt->tanggal_lahir}}</td>
           </tr>
+          @endforeach 
         </tbody>
       </table>
 

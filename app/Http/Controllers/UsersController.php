@@ -92,9 +92,7 @@ class UsersController extends Controller
     public function retrieve_data_karyawan(Request $request) 
     {
       $data = DB::table('karyawan')->get();
-      echo "<pre/>";
-      print_r($data);
-      //return view('data_karyawan'); 
+      return view('data_karyawan',["data"=>$data]); 
     }
 
 }
