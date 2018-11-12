@@ -78,7 +78,8 @@
     </nav>
     <section class="sheet padding-10mm">
       <div class="row">
-          @foreach($data as $dt) 
+      @foreach($data as $dt) 
+      @if ($dt['nama'] != "")
       <div class="col-sm-4" style="padding:5px;page-break-inside:avoid; page-break-after:auto">
         <table style="border: 2px solid black;width:100%">
           <tr>
@@ -113,6 +114,7 @@
           </tr>
         </table>
       </div>
+      @endif
       @endforeach  
     </section>
   </div>
